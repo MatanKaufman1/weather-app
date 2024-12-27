@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Oxygen+Mono&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <title>Weather</title>
+</head>
+<body>
+  <main>
+    <nav class="header-row">
+      <a href="{{ url_for('weather') }}">
+        <h1 class="city-title">Kaufman's Weather App</h1>
+      </a>
+      <div class="header-row">
+        <form id="search-form" method="GET" class="d-flex">
+          <input
+            type="text"
+            name="city"
+            id="search-input"
+            aria-describedby="Search city..."
+            placeholder="Enter city name"
+            class="search-form"
+            autocomplete="off"
+          />
+          <button name="search_btn" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+    <section class="container">
+      <div class="measurements">
+        <!-- Additional content can be added here -->
+      </div>
+    </section>
+
+    <!-- Error message -->
+    {% if error %}
+    <h1 class="error-message" id="error-msg">{{ error }}</h1>
+    {% endif %}
+
+    <!-- Temp and day info -->
+    {% if data %}
+    <section class="current-weather">
+      <div class="container">
+        <div class="row">
+          <div class="col todays-info">
+            <p id="weather-type">{{ data.weather_days[0].description }}</p>
+          </div>
+          <div class="col d-flex align-items-center side-info">
+            <ul>
+              <li class="d-flex align-items-center">
+                <h1 class="city-name" id="city-name">{{ data.city_name }}</h1>
+              </li>
+              <li>
+                <p class="location-name">{{ location }}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <hr />
+    </section>
+    {% endif %}
+
+    <!-- 7-day forecast -->
+    {% if data %}
+    <section class="container">
+      <div class="row week-forecast">
+        {% for day in data.weather_days %}
+        <div class="col">
+          <h3>{{day.date}}</h3>
+          <br />
+          <!-- Day Temperature Icon -->
+          <img src="{% if day.day_temperature >= 24 %}
+                     https://img.icons8.com/color/48/000000/sun.png
+                   {% elif day.day_temperature >= 18 %}
+                     https://img.icons8.com/color/48/000000/partly-cloudy-day.png
+                   {% else %}
+                     https://img.icons8.com/color/48/000000/cloud.png
+                   {% endif %}" />
+          <br />
+          <!-- Day Temperature -->
+          <p class="day-temp">Day Temp: {{ day.day_temperature|round }}°</p>
+          <!-- Night Temperature Icon -->
+          <img src="{% if day.night_temperature >= 23 %}
+                     https://img.icons8.com/color/48/000000/sun.png
+                   {% elif day.night_temperature >= 18 %}
+                     https://img.icons8.com/color/48/000000/partly-cloudy-day.png
+                   {% else %}
+                     https://img.icons8.com/color/48/000000/cloud.png
+                   {% endif %}" />
+          <br />
+          <!-- Night Temperature -->
+          <p class="night-temp">Night Temp: {{ day.night_temperature|round }}°</p>
+          <p class="humidity">Humidity: {{ day.humidity|round(1) }}%</p>
+        </div>
+        {% endfor %}
+      </div>
+    </section>
+    {% else %}
+    {% endif %}
+
+    <footer>
+    </footer>
+
+    <!-- New button at the bottom of the main content -->
+    <div class="container text-center mt-4">
+      <button onclick="window.location.href='/sky';">Take sky picture!</button>
+      <button type="button" onclick="saveData(event)">Save data!</button>
+
+      <!-- Form to save data -->
+      <form id="save-data-form">
+        {% if data %}
+          <input type="hidden" name="city" value="{{ data.city_name }}">
+          <input type="hidden" name="date" value="{{ data.weather_days[0].date }}">
+          <input type="hidden" name="forecast_data" value='{{ data | tojson | safe }}'>
+        {% endif %}
+        <!-- Submit button to trigger the form -->
+      </form>
+    </div>
+    <script>
+    function saveData(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const form = document.getElementById('save-data-form');
+        const formData = new FormData(form);
+
+        fetch('/save-data', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message); // Show a success message
+            } else {
+                alert("Failed to save data.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred while saving data.");
+        });
+    }
+    </script>
+  </main>
+</body>
+</html>

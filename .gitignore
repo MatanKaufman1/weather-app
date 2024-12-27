@@ -11,6 +11,8 @@
 !*.yml
 !*.conf
 !*.txt
+!*.html
+!*.css
 
 # Allow specific files
 !.gitignore
