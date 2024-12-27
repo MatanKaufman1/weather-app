@@ -18,4 +18,3 @@
 !.gitignore
 !.conf
 !.Jenkinsfile
-!.dockerignore
