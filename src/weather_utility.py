@@ -123,7 +123,6 @@ class WeatherUtility:
                 humidity = hourly_data["relative_humidity_2m"][day * 24]
                 date = (datetime.today().date() + timedelta(days=day)).strftime("%Y-%m-%d")
 
-                # Create a Forecast object and convert it to a dictionary
                 forecast = Forecast(date, avg_temp_daytime, avg_temp_nighttime, humidity)
                 weather_days.append(forecast.to_dict())
 
