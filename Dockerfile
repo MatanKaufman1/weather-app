@@ -12,7 +12,8 @@ FROM python:3.11.9-slim AS deploy
 WORKDIR /app
 COPY --from=build app/ /app
 ENV PATH="/app/venv/bin:$PATH"
-#RUN useradd -ms /bin/bash appuser
-#USER appuser
+RUN useradd -ms /bin/bash appuser
+RUN chown -R appuser:appuser /app /home/appuser/
+USER appuser
 EXPOSE 5000
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "wsgi:app"]
