@@ -46,7 +46,7 @@ pipeline {
                 sh "docker run --name ${APP_NAME}_${BUILD_NUMBER} -d -p 5000:5000 ${APP_NAME}:${BUILD_NUMBER}"
             }
         }
-        stage('Check Connectivity') {
+        stage('Smoke test') {
             steps {
                 sh """
                     echo "Checking web-app connectivity"
