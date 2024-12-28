@@ -46,7 +46,7 @@
     }
 
     .temp-title {
-      font-size: 50px;
+      font-size: 25px;
       font-family: "Inter", sans-serif;
       text-align: center;
     }
@@ -109,8 +109,10 @@
     }
 
     h3 {
-      font-size: 22px;
+      font-size: 16px;
       margin-bottom: -18px;
+      color: #030200;
+      font-style: italic;
     }
 
     span {

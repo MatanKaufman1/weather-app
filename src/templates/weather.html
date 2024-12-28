@@ -113,50 +113,8 @@
     </section>
     {% else %}
     {% endif %}
-
     <footer>
     </footer>
-
-    <!-- New button at the bottom of the main content -->
-    <div class="container text-center mt-4">
-      <button onclick="window.location.href='/sky';">Take sky picture!</button>
-      <button type="button" onclick="saveData(event)">Save data!</button>
-
-      <!-- Form to save data -->
-      <form id="save-data-form">
-        {% if data %}
-          <input type="hidden" name="city" value="{{ data.city_name }}">
-          <input type="hidden" name="date" value="{{ data.weather_days[0].date }}">
-          <input type="hidden" name="forecast_data" value='{{ data | tojson | safe }}'>
-        {% endif %}
-        <!-- Submit button to trigger the form -->
-      </form>
-    </div>
-    <script>
-    function saveData(event) {
-        event.preventDefault(); // Prevent the default form submission
-
-        const form = document.getElementById('save-data-form');
-        const formData = new FormData(form);
-
-        fetch('/save-data', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message) {
-                alert(data.message); // Show a success message
-            } else {
-                alert("Failed to save data.");
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            alert("An error occurred while saving data.");
-        });
-    }
-    </script>
   </main>
 </body>
 </html>
