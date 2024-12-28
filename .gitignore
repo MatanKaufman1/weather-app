@@ -1,6 +1,4 @@
-# Ignore all files
 *
-.env
 # But not directories
 !*/
 
