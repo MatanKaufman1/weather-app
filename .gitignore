@@ -15,5 +15,5 @@
 # Allow specific files
 !.gitignore
 !.conf
-!.Jenkinsfile
+!*.Jenkinsfile
 !Dockerfile
