@@ -11,6 +11,7 @@
 !*.txt
 !*.html
 !*.css
+!*.tf
 
 # Allow specific files
 !.gitignore
