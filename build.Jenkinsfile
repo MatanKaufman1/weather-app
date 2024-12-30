@@ -6,7 +6,7 @@ pipeline {
     }
     agent {
         node {
-            label 'agent1'
+            label 'build'
         }
     }
     stages {
