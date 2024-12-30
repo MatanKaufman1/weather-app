@@ -2,7 +2,7 @@ module "vpc" {
   source = "git::https://github.com/terraform-aws-modules/terraform-aws-vpc.git?ref=f02a1af5aedc550c81048cfa880153bedf2a006d"
   version = "5.15.0"
 
-  name = "circleci-vpc"
+  name = "weather-app-vpc"
 
   cidr = "172.20.0.0/16"
   azs  = slice(data.aws_availability_zones.available.names, 0, 3)
