@@ -13,8 +13,6 @@ The **Weather App** is a  simple Flask-based web application designed to provide
 6. [Kubernetes Deployment](#kubernetes-deployment)
 7. [Configuration](#configuration)
 8. [Testing](#testing)
-9. [Contributing](#contributing)
-10. [License](#license)
 11. [Contact Information](#contact-information)
 12. [Acknowledgments](#acknowledgments)
 
@@ -195,19 +193,6 @@ I use two separate Jenkinsfiles, one for the Build Pipeline (build.Jenkinsfile) 
 
 ---
 
-## Contributing
-1. Fork the repository.
-2. Create a feature branch:
-   ```bash
-   git checkout -b feature/your-feature
-   ```
-3. Submit a pull request for review.
-
----
-
-
-
----
 
 ## Contact Information
 - **Maintainer**: Matan Kaufman
