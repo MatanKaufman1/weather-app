@@ -54,6 +54,8 @@ pipeline {
                     . venv/bin/activate
                     cd src/tests/
                     python3 check-connectivity.py
+                    python src/tests/test-selenium.py
+                    deactivate
                     docker stop ${APP_NAME}_${BUILD_NUMBER}
                     """
             }
