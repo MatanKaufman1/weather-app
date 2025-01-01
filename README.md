@@ -104,11 +104,11 @@ The **Weather App** is a  simple Flask-based web application designed to provide
 ---
 
 ## Continuous Integration/Continuous Deployment (CI/CD) Pipeline
-I use two separate Jenkinsfiles, one for the Build Pipeline (build.Jenkinsfile) and another for the Deploy Pipeline (deploy.Jenkinsfile), which offers several benefits:
-**Separation of Concerns**:
+I use two separate Jenkinsfiles, one for the Build Pipeline (build.Jenkinsfile) and another for the Deploy Pipeline (deploy.Jenkinsfile), which offers several benefits.
+ **Separation of Concerns**:
     Each file handles a distinct part of the pipeline: the build pipeline focuses on testing, building, and packaging the application, while the deploy pipeline manages the deployment process. This modular approach makes pipelines easier to manage and debug.
 
-**Flexibility**:
+ **Flexibility**:
     Separate Jenkinsfiles allow you to trigger the deploy pipeline independently of the build pipeline, enabling faster iterations and re-deployments without rebuilding the application.
 ### Build Pipeline (`build.Jenkinsfile`)
 - **Stages**:
