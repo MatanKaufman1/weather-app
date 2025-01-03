@@ -3,6 +3,14 @@
 The **Weather App** is a  simple Flask-based web application designed to provide users with a 7-day weather forecast for any city. This project emphasizes DevOps practices with automated infrastructure provisioning, CI/CD pipelines, and Kubernetes deployment on AWS EKS.
 
 ---
+## Tools in this project:
+1. Self-Hosted GitLab: For Source Control Management (SCM).
+2. Jenkins: For building and deploying the application with CI/CD pipelines.
+3. Terraform: For provisioning infrastructure as code.
+4. AWS (Amazon Web Services): As the cloud provider.
+5. EKS (Elastic Kubernetes Service): For managing containerized applications.
+6. DockerHub: As the container registry to store and manage Docker images.
+---
 
 ## Table of Contents
 1. [Prerequisites](#prerequisites)
